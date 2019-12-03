@@ -74,6 +74,9 @@ class ARSupportAudienceViewController: UIViewController, UIGestureRecognizerDele
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        if self.sessionIsActive {
+            leaveChannel();
+        }
     }
     
     // MARK: Hide status bar
@@ -208,7 +211,6 @@ class ARSupportAudienceViewController: UIViewController, UIGestureRecognizerDele
     // MARK: Button Events
     @IBAction func popView() {
         leaveChannel()                                  // leave the channel
-        self.sessionIsActive = false                    // session is no longer active
         self.dismiss(animated: true, completion: nil)   // dismiss the view
     }
     
@@ -275,7 +277,7 @@ class ARSupportAudienceViewController: UIViewController, UIGestureRecognizerDele
     func setupLocalVideo() {
         // TODO: enable the local video stream
         
-        // TODO: Set video encoding configuration (dimensions, frame-rate, bitrate, orientation
+        // TODO: Set video encoding configuration (dimensions, frame-rate, bitrate, orientation)
         
         // TODO: Set up local video view
     }
@@ -288,6 +290,7 @@ class ARSupportAudienceViewController: UIViewController, UIGestureRecognizerDele
     
     func leaveChannel() {
         // TODO: leave channel - end chat session
+        self.sessionIsActive = false                        // session is no longer active
         UIApplication.shared.isIdleTimerDisabled = false    // Enable idle timer
     }
     
